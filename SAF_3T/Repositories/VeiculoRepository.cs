@@ -27,7 +27,8 @@ namespace SAF_3T.Controllers
 
         public void AtualizarStatus(int id, Veiculo veiculoAtualizado)
         {
-            Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(v => v.IdVeiculo == id);
+            Veiculo veiculoBuscado = new Veiculo();
+            veiculoBuscado = ctx.Veiculos.FirstOrDefault(v => v.IdVeiculo == id);
             veiculoBuscado.IdStatus = veiculoAtualizado.IdStatus;
             ctx.Veiculos.Update(veiculoBuscado);
             ctx.SaveChanges();

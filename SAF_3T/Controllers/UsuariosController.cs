@@ -51,7 +51,7 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpPatch("    /AlterarSenha/{idRecebido}")]
+        [HttpPatch("AlterarSenha/{idRecebido}")]
         public IActionResult AlterarSenha(int idRecebido, Usuario usuarioLogadodo)
         {
             try

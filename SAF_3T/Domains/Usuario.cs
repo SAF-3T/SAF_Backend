@@ -20,10 +20,10 @@ namespace SAF_3T.Domains
         public byte IdTipoUsuario { get; set; }
         public string ImagemUsuario { get; set; }
 
-        [Required(ErrorMessage = "É preciso informar o nome do usuário")]
+        //[Required(ErrorMessage = "É preciso informar o nome do usuário")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "É preciso informar o sobrenome do usuário")]
+        //[Required(ErrorMessage = "É preciso informar o sobrenome do usuário")]
         public string Sobrenome { get; set; }
         public string Ddd { get; set; }
         public string Telefone { get; set; }

@@ -24,8 +24,6 @@ namespace SAF_3T.Domains
         public byte? IdStatus { get; set; }
         public string ImagemVeiculo { get; set; }
         public int IdCarroceria { get; set; }
-
-        [Required(ErrorMessage = "É preciso informar a placa")]
         public string Placa { get; set; }
         public DateTime DataAquisicao { get; set; }
 
