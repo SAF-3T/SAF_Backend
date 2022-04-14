@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SAF_3T.Domains;
 using SAF_3T.Interfaces;
+using SAF_3T.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,10 +92,25 @@ namespace SAF_3T.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(Veiculo novoVeiculo)
+        public ActionResult<Veiculo> CadastrarVeiculo([FromForm] Veiculo novoVeiculo, IFormFile arquivo)
         {
             try
             {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+
+                if (uploadResultado == "")
+                {
+                    return BadRequest("Arquivo não encontrado");
+                }
+
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                novoVeiculo.ImagemVeiculo = uploadResultado;
+
                 _veiculosRepository.Cadastrar(novoVeiculo);
                 return StatusCode(201);
             }
