@@ -25,33 +25,73 @@ namespace SAF_3T.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<TabelaCorrecao>> ListarTodas()
         {
+            try
+            {
             return Ok(_CorrecaoRepository.ListarTodos());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
         }
 
         [HttpGet("{idCorrecao}")]
         public ActionResult<IEnumerable<TabelaCorrecao>> ListarPorId(int idCorrecao)
         {
+            try
+            {
             return Ok(_CorrecaoRepository.BuscarPorId(idCorrecao));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
         }
 
         [HttpGet("Checklist/{idChecklist}")]
         public ActionResult<IEnumerable<TabelaCorrecao>> BuscarMinhas(int idChecklist)
         {
+            try
+            {
             return Ok(_CorrecaoRepository.ListarMinhas(idChecklist));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
         }
 
         [HttpPost]
         public ActionResult<IEnumerable<TabelaCorrecao>> CadastrarCorrecao(TabelaCorrecao novaCorrecao)
         {
+            try
+            {
             _CorrecaoRepository.Cadastrar(novaCorrecao);
             return StatusCode(201);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
         }
 
         [HttpDelete("{idCorrecao}")]
         public ActionResult<IEnumerable<TabelaCorrecao>> DeletarCorrecao(int idCorrecao)
         {
+            try
+            {
             _CorrecaoRepository.Deletar(idCorrecao);
             return StatusCode(204);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
         }
     }
 }

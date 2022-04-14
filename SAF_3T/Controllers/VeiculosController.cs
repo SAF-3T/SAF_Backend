@@ -36,7 +36,15 @@ namespace SAF_3T.Controllers
         [HttpGet("/BuscaId/{idVeiculos}")]
         public IActionResult BuscarPorId(int idVeiculo)
         {
-                return Ok(_veiculosRepository.BuscarPorId(idVeiculo));
+            try
+            {
+            return Ok(_veiculosRepository.BuscarPorId(idVeiculo));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }               
         }
 
         [HttpGet("/BuscaMarca/{idMarca}")]
