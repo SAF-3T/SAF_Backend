@@ -27,17 +27,23 @@ namespace SAF_3T.Repositories
 
         public Usuario BuscarPorCPF(string CPFUsuario)
         {
-            return ctx.Usuarios.FirstOrDefault(u => u.Cpf == CPFUsuario);
+            return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .FirstOrDefault(u => u.Cpf == CPFUsuario);
         }
 
         public Usuario BuscarPorId(int idUsuario)
         {
-           return ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
+           return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .FirstOrDefault(c => c.IdUsuario == idUsuario);
         }
 
         public Usuario BuscarPorNumero(string NumeroUsuario)
         {
-            return ctx.Usuarios.FirstOrDefault(c => c.Telefone == NumeroUsuario);
+            return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .FirstOrDefault(c => c.Telefone == NumeroUsuario);
         }
 
         public void Cadastrar(Usuario novoUsuario)
