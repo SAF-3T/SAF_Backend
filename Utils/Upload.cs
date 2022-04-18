@@ -37,6 +37,7 @@ namespace SAF_3T.Utils
             }
             return false;
         }
+
         public static string UploadFile(IFormFile arquivo, string[] extensoesPermitidas)
         {
             try

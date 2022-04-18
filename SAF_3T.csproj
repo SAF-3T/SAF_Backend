@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="StaticFiles\Images\39cd1c3e-d987-4dbc-85d0-a258548f5de0.png" />
+    <None Remove="StaticFiles\Images\61d822e0-81cf-4c20-8a8d-edc185c8edc5.png" />
+    <None Remove="StaticFiles\Images\cde0f9fd-f82a-4338-a075-0f41ab72fd7c.png" />
+    <None Remove="StaticFiles\Images\fa109307-da7d-4089-af5d-f82c913fdcf7.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.12" />
@@ -17,6 +24,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.16.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="StaticFiles\Images\" />
   </ItemGroup>
 
 </Project>

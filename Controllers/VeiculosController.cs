@@ -40,13 +40,13 @@ namespace SAF_3T.Controllers
         {
             try
             {
-            return Ok(_veiculosRepository.BuscarPorId(idVeiculo));
+                return Ok(_veiculosRepository.BuscarPorId(idVeiculo));
             }
             catch (Exception erro)
             {
                 return BadRequest(erro);
                 throw;
-            }               
+            }
         }
 
         [HttpGet("/BuscaMarca/{idMarca}")]
@@ -54,7 +54,7 @@ namespace SAF_3T.Controllers
         {
             try
             {
-                return Ok(_veiculosRepository.BuscarPorMarca( idMarca));
+                return Ok(_veiculosRepository.BuscarPorMarca(idMarca));
             }
             catch (Exception erro)
             {
@@ -92,18 +92,27 @@ namespace SAF_3T.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Veiculo> CadastrarVeiculo([FromForm] Veiculo novoVeiculo, IFormFile arquivo)
+        public IActionResult CadastrarVeiculo([FromForm] Veiculo novoVeiculo, IFormFile arquivo)
         {
             try
             {
                 string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
                 string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
 
-                if (uploadResultado == "")
+                if (arquivo != null)
                 {
-                    return BadRequest("Arquivo não encontrado");
+                    uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+                }
+                else
+                {
+                    uploadResultado = null;
                 }
 
+                //if (uploadResultado == "")
+                //{
+                //    return BadRequest("Arquivo não encontrado");
+                //}
+            
                 if (uploadResultado == "Extensão não permitida")
                 {
                     return BadRequest("Extensão de arquivo não permitida");
@@ -112,7 +121,7 @@ namespace SAF_3T.Controllers
                 novoVeiculo.ImagemVeiculo = uploadResultado;
 
                 _veiculosRepository.Cadastrar(novoVeiculo);
-                return StatusCode(201);
+                return StatusCode(201, novoVeiculo);
             }
             catch (Exception erro)
             {

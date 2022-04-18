@@ -81,10 +81,11 @@ namespace SAF_3T.Controllers
                 .FirstOrDefault(v => v.Placa == Placa);
         }
 
-        public void Cadastrar(Veiculo novoVeiculo)
+        public Veiculo Cadastrar(Veiculo novoVeiculo)
         {
             ctx.Veiculos.Add(novoVeiculo);
             ctx.SaveChangesAsync();
+            return novoVeiculo;
         }
 
         public void Deletar(int id)
