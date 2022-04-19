@@ -45,27 +45,30 @@ namespace SAF_3T.Utils
                 var pasta = Path.Combine("StaticFiles", "Images");
                 var caminho = Path.Combine(Directory.GetCurrentDirectory(), pasta);
 
-                if (arquivo.Length > 0)
+                if (arquivo != null)
                 {
-                    var fileName = ContentDispositionHeaderValue.Parse(arquivo.ContentDisposition).FileName.Trim('"');
-
-                    if (ValidarExtensao(extensoesPermitidas, fileName))
+                    if (arquivo.Length > 0)
                     {
-                        var extensao = RetornarExtensao(fileName);
-                        var novoNome = $"{Guid.NewGuid()}.{extensao}";
-                        var caminhoCompleto = Path.Combine(caminho, novoNome);
+                        var fileName = ContentDispositionHeaderValue.Parse(arquivo.ContentDisposition).FileName.Trim('"');
 
-                        using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+                        if (ValidarExtensao(extensoesPermitidas, fileName))
                         {
-                            arquivo.CopyTo(stream);
+                            var extensao = RetornarExtensao(fileName);
+                            var novoNome = $"{Guid.NewGuid()}.{extensao}";
+                            var caminhoCompleto = Path.Combine(caminho, novoNome);
+
+                            using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+                            {
+                                arquivo.CopyTo(stream);
+                            }
+
+                            return novoNome;
                         }
 
-                        return novoNome;
+                        return "Extensão não permitida";
                     }
-
-                    return "Extensão não permitida";
-                }
-                return "";
+                    }
+                return "Sem arquivo";
             }
             catch (Exception ex)
             {

@@ -99,19 +99,11 @@ namespace SAF_3T.Controllers
                 string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
                 string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
 
-                if (arquivo != null)
+                if (uploadResultado == "Sem arquivo")
                 {
-                    uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+                _veiculosRepository.Cadastrar(novoVeiculo);
+                    return StatusCode(201, novoVeiculo);
                 }
-                else
-                {
-                    uploadResultado = null;
-                }
-
-                //if (uploadResultado == "")
-                //{
-                //    return BadRequest("Arquivo não encontrado");
-                //}
             
                 if (uploadResultado == "Extensão não permitida")
                 {
@@ -122,6 +114,62 @@ namespace SAF_3T.Controllers
 
                 _veiculosRepository.Cadastrar(novoVeiculo);
                 return StatusCode(201, novoVeiculo);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPatch("AlterarImagem/{idRecebido}")]
+        public IActionResult AlterarImagem( int idRecebido, IFormFile arquivo)
+        {
+            try
+            {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+
+                Veiculo veiculoBuscado =  _veiculosRepository.BuscarPorId(idRecebido);
+                string uploadResultado;
+
+                if (veiculoBuscado.ImagemVeiculo == null)
+                {
+                uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+                    _veiculosRepository.AtualizarImagem(idRecebido, uploadResultado);
+                    return StatusCode(200);
+                }
+                _veiculosRepository.DeletarImagem(idRecebido);
+
+                uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                if(uploadResultado == "Sem arquivo")
+                {
+                    return BadRequest("É necessário informar uma nova foto");
+                }
+                _veiculosRepository.AtualizarImagem(idRecebido, uploadResultado);
+
+                return StatusCode(200);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPatch("DeletarImagem/{idRecebido}")]
+        public IActionResult Removerimagem(int idRecebido)
+        {
+            try
+            {
+            _veiculosRepository.DeletarImagem(idRecebido);
+
+            return StatusCode(204);
             }
             catch (Exception erro)
             {

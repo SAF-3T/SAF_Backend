@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SAF_3T.Contexts;
 using SAF_3T.Domains;
 using SAF_3T.Interfaces;
+using SAF_3T.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,8 +91,28 @@ namespace SAF_3T.Controllers
 
         public void Deletar(int id)
         {
-            ctx.Veiculos.Remove(BuscarPorId(id));
+            Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(v => v.IdVeiculo == id);
+            Upload.RemoverArquivo(veiculoBuscado.ImagemVeiculo);
+            ctx.Veiculos.Remove(veiculoBuscado);
             ctx.SaveChanges();
+        }
+
+        public void DeletarImagem(int idRecebido)
+        {
+            Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(u => u.IdVeiculo == idRecebido);
+            Upload.RemoverArquivo(veiculoBuscado.ImagemVeiculo);
+            veiculoBuscado.ImagemVeiculo = null;
+            ctx.Update(veiculoBuscado);
+            ctx.SaveChangesAsync();
+        }
+
+        public void AtualizarImagem(int idRecebido, string arquivo)
+        {
+            Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(v => v.IdVeiculo == idRecebido);
+
+            veiculoBuscado.ImagemVeiculo = arquivo;
+            ctx.Update(veiculoBuscado);
+            ctx.SaveChangesAsync();
         }
 
         public List<Veiculo> Listar()

@@ -592,7 +592,6 @@ C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\SAF_3T\obj\Debug\net5.0\SAF_3T.
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\SAF_3T\obj\Debug\net5.0\ref\SAF_3T.dll
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\SAF_3T\obj\Debug\net5.0\SAF_3T.pdb
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\SAF_3T\obj\Debug\net5.0\SAF_3T.genruntimeconfig.cache
-<<<<<<< HEAD
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\appsettings.json
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\SAF_3T.exe
@@ -667,7 +666,6 @@ C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\obj\Debug\net5.0\SAF_3T.dll
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\obj\Debug\net5.0\ref\SAF_3T.dll
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\obj\Debug\net5.0\SAF_3T.pdb
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\obj\Debug\net5.0\SAF_3T.genruntimeconfig.cache
-=======
 C:\Users\53438812894.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\53438812894.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\appsettings.json
 C:\Users\53438812894.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\SAF_3T.exe

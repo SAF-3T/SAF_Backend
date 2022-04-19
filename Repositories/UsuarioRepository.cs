@@ -25,6 +25,24 @@ namespace SAF_3T.Repositories
             ctx.SaveChanges();
         }
 
+        public void AtualizarFoto(int idRecebido, string arquivo)
+        {
+            Usuario usuarioLogado = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario == idRecebido);
+
+            usuarioLogado.ImagemUsuario = arquivo;
+            ctx.Update(usuarioLogado);
+            ctx.SaveChanges();
+        }
+
+        public void ExcluirFoto(int idRecebido)
+        {
+            Usuario usuarioLogado = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario == idRecebido);
+            Upload.RemoverArquivo(usuarioLogado.ImagemUsuario);
+            usuarioLogado.ImagemUsuario= null;
+            ctx.Update(usuarioLogado);
+            ctx.SaveChangesAsync();
+        }
+
         public Usuario BuscarPorCPF(string CPFUsuario)
         {
             return ctx.Usuarios
@@ -55,8 +73,9 @@ namespace SAF_3T.Repositories
 
         public void Deletar(int idUsuario)
         {
-            var encontrar = ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
-            ctx.Usuarios.Remove(encontrar);
+            Usuario usuarioBuscado = ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
+            Upload.RemoverArquivo(usuarioBuscado.ImagemUsuario);
+            ctx.Usuarios.Remove(usuarioBuscado);
             ctx.SaveChanges();
         }
 

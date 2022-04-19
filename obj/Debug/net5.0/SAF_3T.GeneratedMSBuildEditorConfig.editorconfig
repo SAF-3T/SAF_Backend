@@ -7,8 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = SAF_3T
-<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\
-=======
-build_property.ProjectDir = C:\Users\53438812894.INFOSCS\Desktop\SAF_Backend\
->>>>>>> ecc82c5e595e4f6d5dd8c4a9f3e9325be00b188b

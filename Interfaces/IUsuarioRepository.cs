@@ -16,6 +16,8 @@ namespace SAF_3T.Interfaces
         Usuario BuscarPorCPF(string CPFUsuario);
         Usuario BuscarPorNumero(string NumeroUsuario);
         void AlterarSenha(int idRecebido, Usuario novaSenha);
+        void ExcluirFoto(int idRecebido);
+        void AtualizarFoto(int idRecebido, string arquivo);
 
     }
 }
