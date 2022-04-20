@@ -117,5 +117,14 @@ namespace SAF_3T.Repositories
 
             return null;
         }
+
+        public List<Usuario> BuscarPorCargo(int idRecebido)
+        {
+            return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .AsNoTracking()
+                .Where(u => u.IdTipoUsuario == idRecebido)
+                .ToList();
+        }
     }
 }

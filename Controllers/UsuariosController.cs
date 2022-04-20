@@ -38,6 +38,20 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("Cargo/{idRecebido}")]
+        public IActionResult ListarPorCargo(int idRecebido)
+        {
+            try
+            {
+                return StatusCode(201, _usuarioRepository.BuscarPorCargo(idRecebido));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpPost]
         public IActionResult CadastrarUsuario([FromForm] Usuario novoUsuario, IFormFile arquivo)
         {

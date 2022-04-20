@@ -18,6 +18,6 @@ namespace SAF_3T.Interfaces
         void AlterarSenha(int idRecebido, Usuario novaSenha);
         void ExcluirFoto(int idRecebido);
         void AtualizarFoto(int idRecebido, string arquivo);
-
+        List<Usuario> BuscarPorCargo(int idRecebido);
     }
 }
