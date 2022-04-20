@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SAF_3T.Domains;
 using SAF_3T.Interfaces;
 using SAF_3T.Repositories;
+using SAF_3T.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,13 +38,42 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Cadastrar(Usuario novoUsuario)
+        [HttpGet("Cargo/{idRecebido}")]
+        public IActionResult ListarPorCargo(int idRecebido)
         {
             try
             {
+                return StatusCode(201, _usuarioRepository.BuscarPorCargo(idRecebido));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CadastrarUsuario([FromForm] Usuario novoUsuario, IFormFile arquivo)
+        {
+            try
+            {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas); ;
+
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                if (uploadResultado == "Sem arquivo")
+                {
+                    _usuarioRepository.Cadastrar(novoUsuario);
+                }
+
+                novoUsuario.ImagemUsuario = uploadResultado;
+
                 _usuarioRepository.Cadastrar(novoUsuario);
-                return StatusCode(201);
+                return StatusCode(201, novoUsuario);
             }
             catch (Exception erro)
             {
@@ -58,6 +89,63 @@ namespace SAF_3T.Controllers
             {
                 _usuarioRepository.AlterarSenha(idRecebido, usuarioLogadodo);
                 return Ok("Senha alterada");
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPatch("AlterarFoto/{idRecebido}")]
+        public IActionResult AlterarFoto(int idRecebido, IFormFile arquivo)
+        {
+            try
+            {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+
+                Usuario usuarioLogado = _usuarioRepository.BuscarPorId(idRecebido);
+                string uploadResultado;
+
+                if (usuarioLogado.ImagemUsuario == null)
+                {
+                    uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+                    _usuarioRepository.AtualizarFoto(idRecebido, uploadResultado);
+                    return StatusCode(200);
+                }
+                _usuarioRepository.ExcluirFoto(idRecebido);
+
+                uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                if (uploadResultado == "Sem arquivo")
+                {
+                    return BadRequest("É necessário informar uma nova foto");
+                }
+                _usuarioRepository.AtualizarFoto(idRecebido, uploadResultado);
+
+                return StatusCode(200);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPatch("RemoverFoto/{idRecebido}")]
+        public IActionResult RemoverFoto(int idRecebido)
+        {
+            try
+            {
+            Usuario usuarioLogado = _usuarioRepository.BuscarPorId(idRecebido);
+            Upload.RemoverArquivo(usuarioLogado.ImagemUsuario);
+            _usuarioRepository.ExcluirFoto(idRecebido);
+            return StatusCode(204);
             }
             catch (Exception erro)
             {
@@ -95,12 +183,12 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpGet("/numero")]
-        public IActionResult BuscarPorNumero(string numero)
+        [HttpGet("/Telefone")]
+        public IActionResult BuscarPorNumero(string Telefone)
         {
             try
             {
-                return Ok(_usuarioRepository.BuscarPorNumero(numero));
+                return Ok(_usuarioRepository.BuscarPorNumero(Telefone));
             }
             catch (Exception erro)
             {

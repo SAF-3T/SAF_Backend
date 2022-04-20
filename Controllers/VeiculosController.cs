@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SAF_3T.Domains;
 using SAF_3T.Interfaces;
+using SAF_3T.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +40,13 @@ namespace SAF_3T.Controllers
         {
             try
             {
-            return Ok(_veiculosRepository.BuscarPorId(idVeiculo));
+                return Ok(_veiculosRepository.BuscarPorId(idVeiculo));
             }
             catch (Exception erro)
             {
                 return BadRequest(erro);
                 throw;
-            }               
+            }
         }
 
         [HttpGet("/BuscaMarca/{idMarca}")]
@@ -52,7 +54,7 @@ namespace SAF_3T.Controllers
         {
             try
             {
-                return Ok(_veiculosRepository.BuscarPorMarca( idMarca));
+                return Ok(_veiculosRepository.BuscarPorMarca(idMarca));
             }
             catch (Exception erro)
             {
@@ -90,12 +92,84 @@ namespace SAF_3T.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(Veiculo novoVeiculo)
+        public IActionResult CadastrarVeiculo([FromForm] Veiculo novoVeiculo, IFormFile arquivo)
         {
             try
             {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+
+                if (uploadResultado == "Sem arquivo")
+                {
                 _veiculosRepository.Cadastrar(novoVeiculo);
-                return StatusCode(201);
+                    return StatusCode(201, novoVeiculo);
+                }
+            
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                novoVeiculo.ImagemVeiculo = uploadResultado;
+
+                _veiculosRepository.Cadastrar(novoVeiculo);
+                return StatusCode(201, novoVeiculo);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPatch("AlterarImagem/{idRecebido}")]
+        public IActionResult AlterarImagem( int idRecebido, IFormFile arquivo)
+        {
+            try
+            {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+
+                Veiculo veiculoBuscado =  _veiculosRepository.BuscarPorId(idRecebido);
+                string uploadResultado;
+
+                if (veiculoBuscado.ImagemVeiculo == null)
+                {
+                uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+                    _veiculosRepository.AtualizarImagem(idRecebido, uploadResultado);
+                    return StatusCode(200);
+                }
+                _veiculosRepository.DeletarImagem(idRecebido);
+
+                uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                if(uploadResultado == "Sem arquivo")
+                {
+                    return BadRequest("É necessário informar uma nova foto");
+                }
+                _veiculosRepository.AtualizarImagem(idRecebido, uploadResultado);
+
+                return StatusCode(200);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
+        [HttpPatch("DeletarImagem/{idRecebido}")]
+        public IActionResult Removerimagem(int idRecebido)
+        {
+            try
+            {
+            _veiculosRepository.DeletarImagem(idRecebido);
+
+            return StatusCode(204);
             }
             catch (Exception erro)
             {

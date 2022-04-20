@@ -25,19 +25,43 @@ namespace SAF_3T.Repositories
             ctx.SaveChanges();
         }
 
+        public void AtualizarFoto(int idRecebido, string arquivo)
+        {
+            Usuario usuarioLogado = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario == idRecebido);
+
+            usuarioLogado.ImagemUsuario = arquivo;
+            ctx.Update(usuarioLogado);
+            ctx.SaveChanges();
+        }
+
+        public void ExcluirFoto(int idRecebido)
+        {
+            Usuario usuarioLogado = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario == idRecebido);
+            Upload.RemoverArquivo(usuarioLogado.ImagemUsuario);
+            usuarioLogado.ImagemUsuario= null;
+            ctx.Update(usuarioLogado);
+            ctx.SaveChangesAsync();
+        }
+
         public Usuario BuscarPorCPF(string CPFUsuario)
         {
-            return ctx.Usuarios.FirstOrDefault(u => u.Cpf == CPFUsuario);
+            return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .FirstOrDefault(u => u.Cpf == CPFUsuario);
         }
 
         public Usuario BuscarPorId(int idUsuario)
         {
-           return ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
+           return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .FirstOrDefault(c => c.IdUsuario == idUsuario);
         }
 
         public Usuario BuscarPorNumero(string NumeroUsuario)
         {
-            return ctx.Usuarios.FirstOrDefault(c => c.Telefone == NumeroUsuario);
+            return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .FirstOrDefault(c => c.Telefone == NumeroUsuario);
         }
 
         public void Cadastrar(Usuario novoUsuario)
@@ -49,8 +73,9 @@ namespace SAF_3T.Repositories
 
         public void Deletar(int idUsuario)
         {
-            var encontrar = ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
-            ctx.Usuarios.Remove(encontrar);
+            Usuario usuarioBuscado = ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
+            Upload.RemoverArquivo(usuarioBuscado.ImagemUsuario);
+            ctx.Usuarios.Remove(usuarioBuscado);
             ctx.SaveChanges();
         }
 
@@ -91,6 +116,15 @@ namespace SAF_3T.Repositories
             }
 
             return null;
+        }
+
+        public List<Usuario> BuscarPorCargo(int idRecebido)
+        {
+            return ctx.Usuarios
+                .Include(u => u.IdTipoUsuarioNavigation)
+                .AsNoTracking()
+                .Where(u => u.IdTipoUsuario == idRecebido)
+                .ToList();
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VA/UtTSxF+weoccSmRmtGdSrkMY/tCwDBzxKagYlXL/geS+GjddoC0OClpEyFj8GxIaBx7sp/8VDDMP4V83z6A==",
+  "dgSpecHash": "m4KXCtdM1tdK8hi3E8NXNVUnjkiNeXqZzl7b9sRh9tiS01cG8EklzQtiz4MMHITFlqfJCjs50a0WP+671SoLzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\45999057809.INFOSCS\\Desktop\\SAF_Backend\\SAF_3T\\SAF_3T.csproj",
+  "projectFilePath": "C:\\Users\\45999057809.INFOSCS\\Desktop\\SAF_Backend\\SAF_3T.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\45999057809.INFOSCS\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\45999057809.INFOSCS\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -151,5 +151,12 @@
     "C:\\Users\\45999057809.INFOSCS\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\45999057809.INFOSCS\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema ao ler o arquivo de cache C:\\Users\\45999057809.INFOSCS\\Desktop\\SAF_Backend\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
