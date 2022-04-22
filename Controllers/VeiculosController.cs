@@ -63,6 +63,21 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("BuscaStatus/{idRecebido}")]
+        public IActionResult BuscarPorStatus(int idRecebido)
+        {
+            try
+            {
+                _veiculosRepository.ListarPorStatus(idRecebido);
+                return StatusCode(201, _veiculosRepository.ListarPorStatus(idRecebido).Count());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpGet("/BuscaCarroceria/{idCarroceria}")]
         public IActionResult BuscarPorCarroceria(byte idCarroceria)
         {

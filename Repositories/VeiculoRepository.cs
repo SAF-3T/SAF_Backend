@@ -40,6 +40,7 @@ namespace SAF_3T.Controllers
             return ctx.Veiculos
                 .AsNoTracking()
                 .Include(v => v.IdStatusNavigation)
+                .Include(v => v.IdMarcaNavigation)
                 .Include(v => v.IdTipoVeiculoNavigation)
                 .Include(v => v.IdCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
@@ -52,6 +53,7 @@ namespace SAF_3T.Controllers
             return ctx.Veiculos
                 .AsNoTracking()
                 .Include(v => v.IdStatusNavigation)
+                .Include(v => v.IdMarcaNavigation)
                 .Include(v => v.IdTipoVeiculoNavigation)
                 .Include(v => v.IdCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
@@ -64,6 +66,7 @@ namespace SAF_3T.Controllers
             return ctx.Veiculos
                 .AsNoTracking()
                 .Include(v => v.IdStatusNavigation)
+                .Include(v => v.IdMarcaNavigation)
                 .Include(v => v.IdTipoVeiculoNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
                 .Where(v => v.IdMarca == idMarca)
@@ -75,6 +78,7 @@ namespace SAF_3T.Controllers
             return ctx.Veiculos
                 .AsNoTracking()
                 .Include(v => v.IdStatusNavigation)
+                .Include(v => v.IdMarcaNavigation)
                 .Include(v => v.IdTipoVeiculoNavigation)
                 .Include(v => v.IdCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
@@ -120,10 +124,25 @@ namespace SAF_3T.Controllers
             return ctx.Veiculos
                 .AsNoTracking()
                 .Include(v => v.IdStatusNavigation)
+                .Include(v => v.IdMarcaNavigation)
                 .Include(v => v.IdTipoVeiculoNavigation)
                 .Include(v => v.IdCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCargaNavigation)
+                .ToList();
+        }
+
+        public List<Veiculo> ListarPorStatus(int idRecebido)
+        {
+            return ctx.Veiculos
+                .AsNoTracking()
+                .Include(v => v.IdStatusNavigation)
+                .Include(v => v.IdMarcaNavigation)
+                .Include(v => v.IdTipoVeiculoNavigation)
+                .Include(v => v.IdCarroceriaNavigation)
+                .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
+                .Include(v => v.IdCarroceriaNavigation.IdTipoCargaNavigation)
+                .Where(v => v.IdStatus == idRecebido)
                 .ToList();
         }
     }
