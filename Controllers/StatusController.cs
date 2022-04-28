@@ -13,20 +13,20 @@ namespace SAF_3T.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class MarcaController : ControllerBase
+    public class StatusController : ControllerBase
     {
-        private IMarcaRepository _marcaRepository { get; set; }
-        public MarcaController()
+        private ITipoStatusRepository _TipoStatusRepository { get; set; }
+        public StatusController()
         {
-            _marcaRepository = new MarcaRepository();
+            _TipoStatusRepository = new TipoStatusRepository();
         }
 
         [HttpGet]
-        public IActionResult ListarMarcas()
+        public IActionResult ListarTodos()
         {
             try
             {
-                return StatusCode(200, _marcaRepository.ListarTodas());
+                return StatusCode(200, _TipoStatusRepository.ListarTudo());
             }
             catch (Exception erro)
             {
@@ -35,12 +35,13 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpGet("/BuscarPorID/{idRecebido}")]
-        public IActionResult ListarPorId(int idRecebido)
+        [HttpPost("/Cadastrar")]
+        public IActionResult Cadastrar(TipoStatus novoStatus)
         {
             try
             {
-                return StatusCode(200, _marcaRepository.ListarPorId(idRecebido));
+                _TipoStatusRepository.Cadastrar(novoStatus);
+                return StatusCode(201);
             }
             catch (Exception erro)
             {
@@ -49,28 +50,13 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpDelete("/Id/{idRecebido}")]
+        [HttpDelete("/Id{idRecebido}")]
         public IActionResult Deletar(int idRecebido)
         {
             try
             {
-                _marcaRepository.Deletar(idRecebido);
+                _TipoStatusRepository.Deletar(idRecebido);
                 return StatusCode(204);
-            }
-            catch (Exception erro)
-            {
-                return BadRequest(erro);
-                throw;
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Cadastrar(Marca novaMarca)
-        {
-            try
-            {
-                _marcaRepository.CadastrarMarca(novaMarca);
-                return StatusCode(201);
             }
             catch (Exception erro)
             {
