@@ -117,7 +117,7 @@ namespace SAF_3T.Controllers
                 if (uploadResultado == "Sem arquivo")
                 {
                 _veiculosRepository.Cadastrar(novoVeiculo);
-                    return StatusCode(201, novoVeiculo);
+                    return StatusCode(200, novoVeiculo);
                 }
             
                 if (uploadResultado == "Extensão não permitida")
@@ -128,7 +128,7 @@ namespace SAF_3T.Controllers
                 novoVeiculo.ImagemVeiculo = uploadResultado;
 
                 _veiculosRepository.Cadastrar(novoVeiculo);
-                return StatusCode(201, novoVeiculo);
+                return StatusCode(200, novoVeiculo);
             }
             catch (Exception erro)
             {
