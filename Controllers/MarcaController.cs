@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SAF_3T.Controllers
 {
-    ´[Produces("application/json")]
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class MarcaController : ControllerBase
