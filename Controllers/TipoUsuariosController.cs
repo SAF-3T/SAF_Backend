@@ -51,7 +51,7 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("TipoUsuarios/{id}")]
         public IActionResult Deletar(int id)
         {
             try

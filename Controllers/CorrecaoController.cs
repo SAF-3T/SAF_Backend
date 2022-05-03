@@ -64,6 +64,20 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("Contagem/{idChecklist}")]
+        public IActionResult ContarCorrecoes(int idChecklist)
+        {
+            try
+            {
+                return StatusCode(200, _CorrecaoRepository.ListarMinhas(idChecklist).Count());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpPost]
         public ActionResult<IEnumerable<TabelaCorrecao>> CadastrarCorrecao(TabelaCorrecao novaCorrecao)
         {

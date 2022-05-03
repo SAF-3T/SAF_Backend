@@ -64,6 +64,20 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("Contagem/{idChecklist}")]
+        public IActionResult ContarErros(int idChecklsist)
+        {
+            try
+            {
+                return StatusCode(200, _ErroRepository.ListarMinhas(idChecklsist).Count());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpPost]
         public ActionResult<IEnumerable<TabelaErro>> CadastrarErro(TabelaErro novoErro)
         {

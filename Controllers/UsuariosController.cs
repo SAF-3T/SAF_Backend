@@ -154,7 +154,7 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("Deletar/{id}")]
         public IActionResult Deletar(int id)
         {
             try

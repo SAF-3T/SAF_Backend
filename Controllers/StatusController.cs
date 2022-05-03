@@ -50,7 +50,7 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpDelete("/Id{idRecebido}")]
+        [HttpDelete("/Id/{idRecebido}")]
         public IActionResult Deletar(int idRecebido)
         {
             try

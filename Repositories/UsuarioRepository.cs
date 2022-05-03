@@ -74,7 +74,7 @@ namespace SAF_3T.Repositories
         public void Deletar(int idUsuario)
         {
             Usuario usuarioBuscado = ctx.Usuarios.FirstOrDefault(c => c.IdUsuario == idUsuario);
-            Upload.RemoverArquivo(usuarioBuscado.ImagemUsuario);
+            //Upload.RemoverArquivo(usuarioBuscado.ImagemUsuario);
             ctx.Usuarios.Remove(usuarioBuscado);
             ctx.SaveChanges();
         }

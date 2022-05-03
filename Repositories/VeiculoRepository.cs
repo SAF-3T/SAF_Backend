@@ -96,7 +96,7 @@ namespace SAF_3T.Controllers
         public void Deletar(int id)
         {
             Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(v => v.IdVeiculo == id);
-            Upload.RemoverArquivo(veiculoBuscado.ImagemVeiculo);
+            //Upload.RemoverArquivo(veiculoBuscado.ImagemVeiculo);
             ctx.Veiculos.Remove(veiculoBuscado);
             ctx.SaveChanges();
         }
