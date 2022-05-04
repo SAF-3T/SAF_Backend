@@ -14,5 +14,6 @@ namespace SAF_3T.Interfaces
         public void Deletar(int id);
 
         public TipoCarga BuscarPorId(int id);
+        public bool VerificaDisponibilidade(string carga);
     }
 }
