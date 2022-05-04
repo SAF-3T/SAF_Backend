@@ -51,6 +51,25 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("/VerificaDisponibilidadeNome/{NomeCarga}")]
+        public IActionResult VerificarDisponibiliade(string NomeCarga)
+        {
+            try
+            {
+                bool disponivel = _tipoCargaRepository.VerificaDisponibilidade(NomeCarga);
+                if (disponivel == true)
+                {
+                    return StatusCode(200, 1);
+                }
+                return StatusCode(200, 0);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpDelete("/{idTipoCarga}")]
         public IActionResult Deletar(int idTipoCarga)
         {

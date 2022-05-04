@@ -18,11 +18,6 @@ namespace SAF_3T.Repositories
             return cargaEncontrada; 
         }
 
-        //void Cadastrar(TipoCarga cargaNova)
-        //{
-            
-        //}
-
         public void Deletar(int id)
         {
             var encontrar = ctx.TipoCargas.FirstOrDefault(c => c.IdTipoCarga == id);
@@ -35,6 +30,16 @@ namespace SAF_3T.Repositories
         public List<TipoCarga> ListarTodas()
         {
             return ctx.TipoCargas.ToList();
+        }
+
+        public bool VerificaDisponibilidade(string carga)
+        {
+            TipoCarga cargaBuscada = ctx.TipoCargas.FirstOrDefault(c => c.NomeTipoCarga == carga);
+            if (cargaBuscada == null)
+            {
+                return true;
+            }
+            return false;
         }
 
         void ITipoCargaRepository.Cadastrar(TipoCarga cargaNova)
