@@ -55,7 +55,7 @@ namespace SAF_3T.Controllers
         {
             try
             {
-            return Ok(_checklistRepository.ListarMinhas(idVeiculo));
+                return StatusCode(200, _checklistRepository.ListarMinhas(idVeiculo));
             }
             catch (Exception erro)
             {

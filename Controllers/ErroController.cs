@@ -35,7 +35,7 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpGet("{idErro}")]
+        [HttpGet("/ListarErro/{idErro}")]
         public ActionResult<IEnumerable<TabelaErro>> ListarPorId(int idErro)
         {
             try
@@ -65,11 +65,11 @@ namespace SAF_3T.Controllers
         }
 
         [HttpGet("Contagem/{idChecklist}")]
-        public IActionResult ContarErros(int idChecklsist)
+        public IActionResult ContarErros(int idChecklist)
         {
             try
             {
-                return StatusCode(200, _ErroRepository.ListarMinhas(idChecklsist).Count());
+                return StatusCode(200, _ErroRepository.ListarMinhas(idChecklist).Count());
             }
             catch (Exception erro)
             {
