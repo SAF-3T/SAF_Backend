@@ -816,3 +816,6 @@ C:\Users\52862507857\Desktop\SAF_Backend\obj\Debug\net5.0\scopedcss\bundle\SAF_3
 C:\Users\52862507857\Desktop\SAF_Backend\obj\Debug\net5.0\SAF_3T.RazorTargetAssemblyInfo.cache
 C:\Users\52862507857\Desktop\SAF_Backend\obj\Debug\net5.0\SAF_3T.csproj.CopyComplete
 C:\Users\52862507857\Desktop\SAF_Backend\obj\Debug\net5.0\SAF_3T.genruntimeconfig.cache
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\de883765-97b1-431a-8311-5441a9c212dc.png
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\PerfilSaf.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\Perfilpadrao.jpg
