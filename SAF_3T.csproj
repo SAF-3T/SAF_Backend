@@ -40,6 +40,9 @@
     <None Update="StaticFiles\Images\PerfilSaf.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="StaticFiles\Images\Veiculopadrao.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
