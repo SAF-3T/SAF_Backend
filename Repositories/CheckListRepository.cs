@@ -71,7 +71,8 @@ namespace SAF_3T.Repositories
                 .Include(c => c.IdVeiculoNavigation)
                 .Include(c => c.IdVeiculoNavigation.IdTipoVeiculoNavigation)
                 .Include(c => c.IdVeiculoNavigation.IdStatusNavigation)
-                .OrderBy(c => c.DataCheckList)
+                .Where(c => c.IdVeiculo == idVeiculo)
+                .OrderByDescending(c => c.DataCheckList)
                 .ToList();
         }
     }
