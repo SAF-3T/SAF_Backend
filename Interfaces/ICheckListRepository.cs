@@ -13,5 +13,6 @@ namespace SAF_3T.Interfaces
         List<CheckList> ListarTodas();
         CheckList BuscarPorId(int idRecebido);
         List<CheckList> ListarMinhas(int idVeiculo);
+        List<CheckList> ListarUltimas(int idVeiculo);
     }
 }

@@ -64,6 +64,20 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("MaisRecentes/{idVeiculo}")]
+        public IActionResult ListarUltimas(int idVeiculo)
+        {
+            try
+            {
+                return StatusCode(200, _checklistRepository.ListarUltimas(idVeiculo));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpPost]
         public ActionResult<CheckList> CadastrarCheckList(CheckList novaChecklist)
         {

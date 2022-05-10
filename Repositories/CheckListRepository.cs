@@ -61,5 +61,18 @@ namespace SAF_3T.Repositories
                 .Include(c => c.IdVeiculoNavigation.IdStatusNavigation)
                 .ToList();
         }
+
+        public List<CheckList> ListarUltimas(int idVeiculo)
+        {
+            return ctx.CheckLists
+                .AsNoTracking()
+                .Include(c => c.IdTipoCheckListNavigation)
+                .Include(c => c.IdUsuarioNavigation)
+                .Include(c => c.IdVeiculoNavigation)
+                .Include(c => c.IdVeiculoNavigation.IdTipoVeiculoNavigation)
+                .Include(c => c.IdVeiculoNavigation.IdStatusNavigation)
+                .OrderBy(c => c.DataCheckList)
+                .ToList();
+        }
     }
 }
