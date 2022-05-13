@@ -62,7 +62,7 @@ namespace SAF_3T.Repositories
                 .ToList();
         }
 
-        public List<CheckList> ListarUltimas(int idVeiculo)
+        public List<CheckList> ListarMinhasUltimas(int idVeiculo)
         {
             return ctx.CheckLists
                 .AsNoTracking()
@@ -74,6 +74,16 @@ namespace SAF_3T.Repositories
                 .Where(c => c.IdVeiculo == idVeiculo)
                 .OrderByDescending(c => c.DataCheckList)
                 .ToList();
+        }
+
+        public CheckList ListarUltimaCadastrada()
+        {
+            return ctx.CheckLists
+                .AsNoTracking()
+                .Include(c => c.IdVeiculoNavigation)
+                .OrderBy(c => c.DataCheckList)
+                .Last();
+
         }
     }
 }

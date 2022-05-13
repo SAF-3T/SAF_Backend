@@ -69,7 +69,21 @@ namespace SAF_3T.Controllers
         {
             try
             {
-                return StatusCode(200, _checklistRepository.ListarUltimas(idVeiculo));
+                return StatusCode(200, _checklistRepository.ListarMinhasUltimas(idVeiculo));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+        
+        [HttpGet("UltimaCadastrada")]
+        public IActionResult ListarUltimaCadastrada()
+        {
+            try
+            {
+                return StatusCode(200, _checklistRepository.ListarUltimaCadastrada());
             }
             catch (Exception erro)
             {
