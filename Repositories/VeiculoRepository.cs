@@ -129,6 +129,7 @@ namespace SAF_3T.Controllers
                 .Include(v => v.IdCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCarroceriaNavigation)
                 .Include(v => v.IdCarroceriaNavigation.IdTipoCargaNavigation)
+                .OrderByDescending(c => c.DataAquisicao)
                 .ToList();
         }
 
