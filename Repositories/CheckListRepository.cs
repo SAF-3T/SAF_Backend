@@ -59,6 +59,7 @@ namespace SAF_3T.Repositories
                 .Include(c => c.IdVeiculoNavigation)
                 .Include(c => c.IdVeiculoNavigation.IdTipoVeiculoNavigation)
                 .Include(c => c.IdVeiculoNavigation.IdStatusNavigation)
+                .OrderByDescending(c => c.DataCheckList)
                 .ToList();
         }
 
@@ -79,8 +80,6 @@ namespace SAF_3T.Repositories
         public CheckList ListarUltimaCadastrada()
         {
             return ctx.CheckLists
-                .AsNoTracking()
-                .Include(c => c.IdVeiculoNavigation)
                 .OrderBy(c => c.DataCheckList)
                 .Last();
 
