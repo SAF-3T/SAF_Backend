@@ -8,7 +8,7 @@ namespace SAF_3T.Interfaces
     interface ICarroceriaRepository
     {
         List<Carrocerium> Listar();
-
+        List<Carrocerium> ListarCarroceriasSemUso();
         Carrocerium BuscarPorId(int IdCarroceria);
         void Cadastrar(Carrocerium novaCarroceria);
         void AlterarTipoCarga(int idRecebido, Carrocerium atualizaCarroceria);

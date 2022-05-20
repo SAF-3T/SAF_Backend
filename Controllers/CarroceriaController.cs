@@ -36,6 +36,20 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpGet("ListarComCorrespondencia")]
+        public IActionResult ListarCorrespondentes()
+        {
+            try
+            {
+                return StatusCode(200, _carroceriaRepository.ListarCarroceriasSemUso());
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpGet("/BuscaId/{idCarroceria}")]
         public IActionResult ListarPorId(int idCarroceria)
         {

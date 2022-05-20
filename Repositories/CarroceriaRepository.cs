@@ -70,5 +70,29 @@ namespace SAF_3T.Repositories
                 .Include(c => c.IdTipoCargaNavigation)
                 .ToList();
         }
+
+        public List<Carrocerium> ListarCarroceriasSemUso()
+        {
+            List<Veiculo> listaVeiculos = ctx.Veiculos.ToList();
+            List<Carrocerium> listaCarrocerias = ctx.Carroceria.ToList();
+            List<Carrocerium> listaComCorrespondencia = '';
+            Carrocerium carroceria;
+
+            for (int a = 1; a < listaCarrocerias.Count; a++)
+            {
+                for (int i = 1; i < listaVeiculos.Count; i++)
+                {
+                    carroceria = ctx.Carroceria.FirstOrDefault(c => listaCarrocerias[i].IdCarroceria == listaCarrocerias[a].IdCarroceria);
+                    //carroceria = ctx.Carroceria.Find(listaVeiculos[i].IdCarroceria == listaCarrocerias[a].IdCarroceria);
+
+
+                    if (carroceria != null)
+                    {
+                        listaComCorrespondencia.Add(carroceria);
+                    }
+                }
+            }
+            return listaComCorrespondencia;
+        }
     }
 }
