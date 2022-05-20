@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SAF_3T.Domains;
 using SAF_3T.Interfaces;
 using SAF_3T.Repositories;
+using SAF_3T.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,13 +79,28 @@ namespace SAF_3T.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult<IEnumerable<TabelaErro>> CadastrarErro(TabelaErro novoErro)
+        [HttpPost("CadastrarErro")]
+        public IActionResult CadastrarErro([FromForm] TabelaErro novoErro, IFormFile arquivo)
         {
             try
             {
-            _ErroRepository.Cadastrar(novoErro);
-            return StatusCode(201);
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas); ;
+
+                if (uploadResultado == "Extensão não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+
+                if (uploadResultado == "Sem arquivo")
+                {
+                    _ErroRepository.Cadastrar(novoErro);
+                }
+
+                novoErro.ImagemErro = uploadResultado;
+
+                _ErroRepository.Cadastrar(novoErro);
+                return StatusCode(201, novoErro);
             }
             catch (Exception erro)
             {

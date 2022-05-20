@@ -23,6 +23,12 @@ namespace SAF_3T.Utils
 
             File.Delete(caminhoCompleto);
         }
+
+        internal static string UploadFile(object arquivo, string[] extensoesPermitidas)
+        {
+            throw new NotImplementedException();
+        }
+
         public static bool ValidarExtensao(string[] extensoes, string nomeDoArquivo)
         {
             string[] dados = nomeDoArquivo.Split(".");
