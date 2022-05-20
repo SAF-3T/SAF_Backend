@@ -57,8 +57,10 @@ namespace SAF_3T.Controllers
         {
             try
             {
+                if (_usuarioRepository.VerificaDisponibilidade(novoUsuario))
+                {
                 string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
-                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas); ;
+                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
 
                 if (uploadResultado == "Extensão não permitida")
                 {
@@ -74,6 +76,8 @@ namespace SAF_3T.Controllers
 
                 _usuarioRepository.Cadastrar(novoUsuario);
                 return StatusCode(201, novoUsuario);
+                }
+                return StatusCode(400, "CPF ou Telefone já cadastrados");
             }
             catch (Exception erro)
             {

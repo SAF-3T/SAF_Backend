@@ -146,6 +146,16 @@ namespace SAF_3T.Controllers
                 .Where(v => v.IdStatus == idRecebido)
                 .ToList();
         }
+
+        public bool VerificaDisponibilidade(Veiculo tentativaCadastroVeiculo)
+        {
+            Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(c => c.Placa == tentativaCadastroVeiculo.Placa || c.IdCarroceria == tentativaCadastroVeiculo.IdCarroceria);
+            if (veiculoBuscado == null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
 

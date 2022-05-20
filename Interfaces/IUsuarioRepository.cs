@@ -19,5 +19,6 @@ namespace SAF_3T.Interfaces
         void ExcluirFoto(int idRecebido);
         void AtualizarFoto(int idRecebido, string arquivo);
         List<Usuario> BuscarPorCargo(int idRecebido);
+        bool VerificaDisponibilidade(Usuario tentativaDeCadastro);
     }
 }

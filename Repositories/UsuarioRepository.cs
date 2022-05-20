@@ -126,5 +126,15 @@ namespace SAF_3T.Repositories
                 .Where(u => u.IdTipoUsuario == idRecebido)
                 .ToList();
         }
+
+        public bool VerificaDisponibilidade(Usuario tentativaDeCadastro)
+        {
+            Usuario usuarioBuscado = ctx.Usuarios.FirstOrDefault(c => c.Cpf == tentativaDeCadastro.Cpf || c.Telefone == tentativaDeCadastro.Telefone);
+            if (usuarioBuscado == null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -20,5 +20,6 @@ namespace SAF_3T.Interfaces
         void DeletarImagem(int idRecebido);
         void AtualizarImagem(int idRecebido, string arquivo);
         List<Veiculo> ListarPorStatus(int idRecebido);
+        bool VerificaDisponibilidade(Veiculo tentativaCadastroVeiculo);
     }
 }

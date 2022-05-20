@@ -111,24 +111,28 @@ namespace SAF_3T.Controllers
         {
             try
             {
-                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
-                string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
-
-                if (uploadResultado == "Sem arquivo")
+                if (_veiculosRepository.VerificaDisponibilidade(novoVeiculo))
                 {
-                _veiculosRepository.Cadastrar(novoVeiculo);
+                    string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                    string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+
+                    if (uploadResultado == "Sem arquivo")
+                    {
+                        _veiculosRepository.Cadastrar(novoVeiculo);
+                        return StatusCode(200, novoVeiculo);
+                    }
+
+                    if (uploadResultado == "Extensão não permitida")
+                    {
+                        return BadRequest("Extensão de arquivo não permitida");
+                    }
+
+                    novoVeiculo.ImagemVeiculo = uploadResultado;
+
+                    _veiculosRepository.Cadastrar(novoVeiculo);
                     return StatusCode(200, novoVeiculo);
                 }
-            
-                if (uploadResultado == "Extensão não permitida")
-                {
-                    return BadRequest("Extensão de arquivo não permitida");
-                }
-
-                novoVeiculo.ImagemVeiculo = uploadResultado;
-
-                _veiculosRepository.Cadastrar(novoVeiculo);
-                return StatusCode(200, novoVeiculo);
+                return StatusCode(400, "Placa já cadastrada, ou Carroceria já em uso");
             }
             catch (Exception erro)
             {
