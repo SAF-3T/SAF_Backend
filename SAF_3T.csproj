@@ -34,6 +34,12 @@
     <None Update="StaticFiles\Images\de883765-97b1-431a-8311-5441a9c212dc.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="StaticFiles\Images\imagem1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticFiles\Images\imagem2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="StaticFiles\Images\Perfilpadrao.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
