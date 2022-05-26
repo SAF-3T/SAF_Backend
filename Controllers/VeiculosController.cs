@@ -132,7 +132,7 @@ namespace SAF_3T.Controllers
                     _veiculosRepository.Cadastrar(novoVeiculo);
                     return StatusCode(200, novoVeiculo);
                 }
-                return StatusCode(400, "Placa já cadastrada, ou Carroceria já em uso");
+                return StatusCode(204, "Placa já cadastrada, ou Carroceria já em uso");
             }
             catch (Exception erro)
             {

@@ -77,7 +77,7 @@ namespace SAF_3T.Controllers
                 _usuarioRepository.Cadastrar(novoUsuario);
                 return StatusCode(201, novoUsuario);
                 }
-                return StatusCode(400, "CPF ou Telefone já cadastrados");
+                return StatusCode(204, "CPF ou Telefone já cadastrados");
             }
             catch (Exception erro)
             {
