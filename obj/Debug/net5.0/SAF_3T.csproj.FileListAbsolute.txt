@@ -822,3 +822,9 @@ C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Im
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\Veiculopadrao.png
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\imagem1.jpg
 C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\imagem2.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\cam1.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\cam2.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\cam21.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\cam22.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\cam31.jpg
+C:\Users\45999057809.INFOSCS\Desktop\SAF_Backend\bin\Debug\net5.0\StaticFiles\Images\cam32.jpg

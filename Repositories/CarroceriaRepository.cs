@@ -74,24 +74,19 @@ namespace SAF_3T.Repositories
         public List<Carrocerium> ListarCarroceriasSemUso()
         {
             List<Veiculo> listaVeiculos = ctx.Veiculos.ToList();
-            List<Carrocerium> listaCarrocerias = ctx.Carroceria.ToList();
-            List<Carrocerium> listaComCorrespondencia = '';
+            List<Carrocerium> listaComCorrespondencia = null;
             Carrocerium carroceria;
 
-            for (int a = 1; a < listaCarrocerias.Count; a++)
-            {
                 for (int i = 1; i < listaVeiculos.Count; i++)
                 {
-                    carroceria = ctx.Carroceria.FirstOrDefault(c => listaCarrocerias[i].IdCarroceria == listaCarrocerias[a].IdCarroceria);
-                    //carroceria = ctx.Carroceria.Find(listaVeiculos[i].IdCarroceria == listaCarrocerias[a].IdCarroceria);
-
+                    carroceria = ctx.Carroceria.FirstOrDefault(c => c.IdCarroceria == listaVeiculos[i].IdCarroceria);
 
                     if (carroceria != null)
                     {
-                        listaComCorrespondencia.Add(carroceria);
+                    listaComCorrespondencia.Add(carroceria);
                     }
                 }
-            }
+                ctx.SaveChanges();
             return listaComCorrespondencia;
         }
     }
