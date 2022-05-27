@@ -58,6 +58,18 @@
     <None Update="StaticFiles\Images\imagem2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="StaticFiles\Images\logoSAFclaro.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticFiles\Images\logoSAFescuro.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticFiles\Images\logoSAFmedio.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticFiles\Images\logoSAFpreto.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="StaticFiles\Images\Perfilpadrao.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
