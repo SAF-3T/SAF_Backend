@@ -22,7 +22,6 @@ namespace SAF_3T.Controllers
             veiculoBuscado.IdMarca = veiculoAtualizado.IdMarca;
             veiculoBuscado.IdUsuario = veiculoAtualizado.IdUsuario;
             veiculoBuscado.IdCarroceria = veiculoAtualizado.IdCarroceria;
-            veiculoBuscado.ImagemVeiculo = veiculoAtualizado.ImagemVeiculo;
             ctx.SaveChanges();
         }
 
@@ -104,8 +103,8 @@ namespace SAF_3T.Controllers
         public void DeletarImagem(int idRecebido)
         {
             Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(u => u.IdVeiculo == idRecebido);
-            Upload.RemoverArquivo(veiculoBuscado.ImagemVeiculo);
-            veiculoBuscado.ImagemVeiculo = null;
+            Upload.RemoverArquivo(veiculoBuscado.ImagemFrontalPadrao);
+            veiculoBuscado.ImagemFrontalPadrao = null;
             ctx.Update(veiculoBuscado);
             ctx.SaveChangesAsync();
         }
@@ -114,7 +113,7 @@ namespace SAF_3T.Controllers
         {
             Veiculo veiculoBuscado = ctx.Veiculos.FirstOrDefault(v => v.IdVeiculo == idRecebido);
 
-            veiculoBuscado.ImagemVeiculo = arquivo;
+            veiculoBuscado.ImagemFrontalPadrao = arquivo;
             ctx.Update(veiculoBuscado);
             ctx.SaveChangesAsync();
         }

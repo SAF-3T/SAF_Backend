@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -15,14 +14,13 @@ namespace SAF_3T.Domains
 
         public int IdVeiculo { get; set; }
         public int IdUsuario { get; set; }
-
-        [Required(ErrorMessage = "É preciso informar o idMarca")]
         public byte IdMarca { get; set; }
-
-        [Required(ErrorMessage = "É preciso informar o idTipoVeiculo")]
         public byte IdTipoVeiculo { get; set; }
         public byte? IdStatus { get; set; }
-        public string ImagemVeiculo { get; set; }
+        public string ImagemFrontalPadrao { get; set; }
+        public string ImagemTraseiraPadrao { get; set; }
+        public string ImagemLateralDireitaPadrao { get; set; }
+        public string ImagemLateralEsquerdaPadrao { get; set; }
         public int IdCarroceria { get; set; }
         public string Placa { get; set; }
         public DateTime DataAquisicao { get; set; }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -15,16 +14,18 @@ namespace SAF_3T.Domains
         }
 
         public int IdCheckList { get; set; }
-
-        [Required(ErrorMessage = "É necessário informar o tipo de checklist cadastrada")]
         public byte IdTipoCheckList { get; set; }
-        
-        [Required(ErrorMessage = "É necessário informar a qual veículo esta checklist pertence")]
         public int IdVeiculo { get; set; }
-
-        [Required(ErrorMessage = "É necessário informar qual o usuário efetuou a checklist")]
         public int IdUsuario { get; set; }
         public DateTime DataCheckList { get; set; }
+        public string ImagemFrontal { get; set; }
+        public string ImagemTraseira { get; set; }
+        public string ImagemLateralDireita { get; set; }
+        public string ImagemLateralEsquerda { get; set; }
+        public decimal? PorcentagemFrontal { get; set; }
+        public decimal? PorcentagemTraseira { get; set; }
+        public decimal? PorcentagemLateralDireita { get; set; }
+        public decimal? PorcentagemLateralEsquerda { get; set; }
 
         public virtual TipoCheckList IdTipoCheckListNavigation { get; set; }
         public virtual Usuario IdUsuarioNavigation { get; set; }

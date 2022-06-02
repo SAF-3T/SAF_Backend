@@ -127,7 +127,7 @@ namespace SAF_3T.Controllers
                         return BadRequest("Extensão de arquivo não permitida");
                     }
 
-                    novoVeiculo.ImagemVeiculo = uploadResultado;
+                    novoVeiculo.ImagemFrontalPadrao = uploadResultado;
 
                     _veiculosRepository.Cadastrar(novoVeiculo);
                     return StatusCode(200, novoVeiculo);
@@ -151,7 +151,7 @@ namespace SAF_3T.Controllers
                 Veiculo veiculoBuscado =  _veiculosRepository.BuscarPorId(idRecebido);
                 string uploadResultado;
 
-                if (veiculoBuscado.ImagemVeiculo == null)
+                if (veiculoBuscado.ImagemFrontalPadrao == null)
                 {
                 uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
                     _veiculosRepository.AtualizarImagem(idRecebido, uploadResultado);

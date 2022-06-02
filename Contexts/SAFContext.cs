@@ -38,11 +38,7 @@ namespace SAF_3T.Contexts
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                //optionsBuilder.UseSqlServer("Data Source=NOTE0113E5\\SQLEXPRESS; initial catalog=SAF_3T; user Id=sa; pwd=Senai@132;")
-
-                //vitor
-                //optionsBuilder.UseSqlServer("Data Source=DESKTOP-RR2ANFV; initial catalog=SAF_3T; user Id=sa; pwd=Senai@132;");
-
+                //optionsBuilder.UseSqlServer("Data Source=NOTE0113E5\\SQLEXPRESS; initial catalog=SAF_DB; user Id=sa; pwd=Senai@132;");
                 optionsBuilder.UseSqlServer("Data Source=dbserver-saf.database.windows.net; initial catalog=SAF-DB; user Id=masteruser; pwd=senai@132;");
             }
         }
@@ -54,7 +50,7 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<Carrocerium>(entity =>
             {
                 entity.HasKey(e => e.IdCarroceria)
-                    .HasName("PK__Carrocer__06E6D1D3444123C8");
+                    .HasName("PK__Carrocer__06E6D1D3C24E6E92");
 
                 entity.Property(e => e.Cubagem)
                     .IsRequired()
@@ -82,11 +78,35 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<CheckList>(entity =>
             {
                 entity.HasKey(e => e.IdCheckList)
-                    .HasName("PK__CheckLis__8AB3BAB9AFF081F5");
+                    .HasName("PK__CheckLis__8AB3BAB9712231C2");
 
                 entity.ToTable("CheckList");
 
                 entity.Property(e => e.DataCheckList).HasColumnType("datetime");
+
+                entity.Property(e => e.ImagemFrontal)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagemLateralDireita)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagemLateralEsquerda)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagemTraseira)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PorcentagemFrontal).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.PorcentagemLateralDireita).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.PorcentagemLateralEsquerda).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.PorcentagemTraseira).HasColumnType("decimal(18, 0)");
 
                 entity.HasOne(d => d.IdTipoCheckListNavigation)
                     .WithMany(p => p.CheckLists)
@@ -110,7 +130,7 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<Marca>(entity =>
             {
                 entity.HasKey(e => e.IdMarca)
-                    .HasName("PK__Marca__4076A88785217AC5");
+                    .HasName("PK__Marca__4076A8873F36673D");
 
                 entity.ToTable("Marca");
 
@@ -125,7 +145,7 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TabelaCorrecao>(entity =>
             {
                 entity.HasKey(e => e.IdCorrecao)
-                    .HasName("PK__TabelaCo__4C74DFAAF17D5EEE");
+                    .HasName("PK__TabelaCo__4C74DFAA64E821DC");
 
                 entity.ToTable("TabelaCorrecao");
 
@@ -153,7 +173,7 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TabelaErro>(entity =>
             {
                 entity.HasKey(e => e.IdErro)
-                    .HasName("PK__TabelaEr__071D49239F275DA2");
+                    .HasName("PK__TabelaEr__071D49234A8C1D10");
 
                 entity.ToTable("TabelaErro");
 
@@ -179,11 +199,11 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoCarga>(entity =>
             {
                 entity.HasKey(e => e.IdTipoCarga)
-                    .HasName("PK__TipoCarg__5D382ACBF9DC1C77");
+                    .HasName("PK__TipoCarg__5D382ACB3F0A69C5");
 
                 entity.ToTable("TipoCarga");
 
-                entity.HasIndex(e => e.NomeTipoCarga, "UQ__TipoCarg__4D91679ABCE2E525")
+                entity.HasIndex(e => e.NomeTipoCarga, "UQ__TipoCarg__4D91679AD867107D")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoCarga).ValueGeneratedOnAdd();
@@ -197,9 +217,9 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoCarrocerium>(entity =>
             {
                 entity.HasKey(e => e.IdTipoCarroceria)
-                    .HasName("PK__TipoCarr__69CC3D3AD9D75CDA");
+                    .HasName("PK__TipoCarr__69CC3D3A5AD0AD20");
 
-                entity.HasIndex(e => e.NomeTipoCarroceria, "UQ__TipoCarr__2E5807AB567F0967")
+                entity.HasIndex(e => e.NomeTipoCarroceria, "UQ__TipoCarr__2E5807AB00487CB1")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoCarroceria).ValueGeneratedOnAdd();
@@ -213,11 +233,11 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoCheckList>(entity =>
             {
                 entity.HasKey(e => e.IdTipoCheckList)
-                    .HasName("PK__TipoChec__2A1B477FC25A1554");
+                    .HasName("PK__TipoChec__2A1B477F8E002A6A");
 
                 entity.ToTable("TipoCheckList");
 
-                entity.HasIndex(e => e.NomeTipoCheckList, "UQ__TipoChec__400798D17D96592E")
+                entity.HasIndex(e => e.NomeTipoCheckList, "UQ__TipoChec__400798D1FC270446")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoCheckList).ValueGeneratedOnAdd();
@@ -231,11 +251,11 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoErro>(entity =>
             {
                 entity.HasKey(e => e.IdTipoErro)
-                    .HasName("PK__TipoErro__C45A405A6C780037");
+                    .HasName("PK__TipoErro__C45A405AF5686DCA");
 
                 entity.ToTable("TipoErro");
 
-                entity.HasIndex(e => e.NomeTipoErro, "UQ__TipoErro__8C1388AA1FAE797F")
+                entity.HasIndex(e => e.NomeTipoErro, "UQ__TipoErro__8C1388AAFFC599E9")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoErro).ValueGeneratedOnAdd();
@@ -249,7 +269,7 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoStatus>(entity =>
             {
                 entity.HasKey(e => e.IdStatus)
-                    .HasName("PK__TipoStat__B450643A24C297B2");
+                    .HasName("PK__TipoStat__B450643AC78229E2");
 
                 entity.ToTable("TipoStatus");
 
@@ -263,11 +283,11 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsuario)
-                    .HasName("PK__TipoUsua__CA04062BF7C1AAAA");
+                    .HasName("PK__TipoUsua__CA04062BE584646A");
 
                 entity.ToTable("TipoUsuario");
 
-                entity.HasIndex(e => e.NomeTipoUsuario, "UQ__TipoUsua__C6FB90A8FC2AC050")
+                entity.HasIndex(e => e.NomeTipoUsuario, "UQ__TipoUsua__C6FB90A87A48B251")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoUsuario).ValueGeneratedOnAdd();
@@ -281,11 +301,11 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<TipoVeiculo>(entity =>
             {
                 entity.HasKey(e => e.IdTipoVeiculo)
-                    .HasName("PK__TipoVeic__14D60C48CF2A9AD2");
+                    .HasName("PK__TipoVeic__14D60C48CED17DD1");
 
                 entity.ToTable("TipoVeiculo");
 
-                entity.HasIndex(e => e.NomeTipoVeiculo, "UQ__TipoVeic__494F57D0257BA291")
+                entity.HasIndex(e => e.NomeTipoVeiculo, "UQ__TipoVeic__494F57D02DEAC6B3")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoVeiculo).ValueGeneratedOnAdd();
@@ -299,11 +319,11 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuario__5B65BF97AB4D50D9");
+                    .HasName("PK__Usuario__5B65BF974E98A184");
 
                 entity.ToTable("Usuario");
 
-                entity.HasIndex(e => e.Cpf, "UQ__Usuario__C1F897315C6E6B7A")
+                entity.HasIndex(e => e.Cpf, "UQ__Usuario__C1F8973126FE47E7")
                     .IsUnique();
 
                 entity.Property(e => e.Cpf)
@@ -353,16 +373,28 @@ namespace SAF_3T.Contexts
             modelBuilder.Entity<Veiculo>(entity =>
             {
                 entity.HasKey(e => e.IdVeiculo)
-                    .HasName("PK__Veiculo__CAC4F346ED77A17E");
+                    .HasName("PK__Veiculo__CAC4F3465EED422D");
 
                 entity.ToTable("Veiculo");
 
-                entity.HasIndex(e => e.Placa, "UQ__Veiculo__8310F99D9D897DCE")
+                entity.HasIndex(e => e.Placa, "UQ__Veiculo__8310F99DAE04F5DE")
                     .IsUnique();
 
                 entity.Property(e => e.DataAquisicao).HasColumnType("datetime");
 
-                entity.Property(e => e.ImagemVeiculo)
+                entity.Property(e => e.ImagemFrontalPadrao)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagemLateralDireitaPadrao)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagemLateralEsquerdaPadrao)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ImagemTraseiraPadrao)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 

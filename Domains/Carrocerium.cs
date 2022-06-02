@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -15,9 +14,6 @@ namespace SAF_3T.Domains
 
         public int IdCarroceria { get; set; }
         public byte IdTipoCarga { get; set; }
-        
-
-        [Required(ErrorMessage = "É necessário informar o tipo de Carroceria")]
         public byte IdTipoCarroceria { get; set; }
         public string Cubagem { get; set; }
         public string Peso { get; set; }
