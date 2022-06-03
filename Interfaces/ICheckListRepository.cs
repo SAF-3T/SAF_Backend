@@ -15,5 +15,6 @@ namespace SAF_3T.Interfaces
         List<CheckList> ListarMinhas(int idVeiculo);
         List<CheckList> ListarMinhasUltimas(int idVeiculo);
         CheckList ListarUltimaCadastrada();
+        void AlteraCorrrespondencia(int id);
     }
 }

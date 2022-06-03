@@ -130,6 +130,21 @@ namespace SAF_3T.Controllers
             }
         }
 
+        [HttpPatch("AprovaChecklist/{idChecklist}")]
+        public IActionResult AprovaChecklist(int idChecklist)
+        {
+            try
+            {
+                _checklistRepository.AlteraCorrrespondencia(idChecklist);
+                return StatusCode(200);
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpDelete("{idChecklist}")]
         public ActionResult<CheckList> DeletarCheckList(int idChecklist)
         {

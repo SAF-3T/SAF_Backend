@@ -84,5 +84,17 @@ namespace SAF_3T.Repositories
                 .Last();
 
         }
+
+        public void AlteraCorrrespondencia(int id)
+        {
+            CheckList checklistVisualizada = new CheckList();
+            checklistVisualizada = ctx.CheckLists.FirstOrDefault(v => v.IdCheckList == id);
+            checklistVisualizada.PorcentagemFrontal = 100;
+            checklistVisualizada.PorcentagemTraseira = 100;
+            checklistVisualizada.PorcentagemLateralDireita = 100;
+            checklistVisualizada.PorcentagemLateralEsquerda = 100;
+            ctx.CheckLists.Update(checklistVisualizada);
+            ctx.SaveChanges();
+        }
     }
 }
