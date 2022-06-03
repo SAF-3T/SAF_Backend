@@ -107,27 +107,33 @@ namespace SAF_3T.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarVeiculo([FromForm] Veiculo novoVeiculo, IFormFile arquivo)
+        public IActionResult CadastrarVeiculo([FromForm] Veiculo novoVeiculo, IFormFile imagemFrontal, IFormFile imagemTraseira, IFormFile imagemEsquerda, IFormFile imagemDireita)
         {
             try
             {
                 if (_veiculosRepository.VerificaDisponibilidade(novoVeiculo))
                 {
                     string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
-                    string uploadResultado = Upload.UploadFile(arquivo, extensoesPermitidas);
+                    string uploadResultadoF = Upload.UploadFile(imagemFrontal, extensoesPermitidas);
+                    string uploadResultadoT = Upload.UploadFile(imagemTraseira, extensoesPermitidas);
+                    string uploadResultadoE = Upload.UploadFile(imagemEsquerda, extensoesPermitidas);
+                    string uploadResultadoD = Upload.UploadFile(imagemDireita, extensoesPermitidas);
 
-                    if (uploadResultado == "Sem arquivo")
+                    if (uploadResultadoF == "Sem arquivo" || uploadResultadoT == "Sem arquivo" || uploadResultadoE == "Sem arquivo" || uploadResultadoD == "Sem arquivo")
                     {
                         _veiculosRepository.Cadastrar(novoVeiculo);
                         return StatusCode(200, novoVeiculo);
                     }
 
-                    if (uploadResultado == "Extensão não permitida")
+                    if (uploadResultadoF == "Extenção não permitida" || uploadResultadoT == "Extenção não permitida" || uploadResultadoE == "Extenção não permitida" || uploadResultadoD == "Extenção não permitida")
                     {
                         return BadRequest("Extensão de arquivo não permitida");
                     }
 
-                    novoVeiculo.ImagemFrontalPadrao = uploadResultado;
+                    novoVeiculo.ImagemFrontalPadrao = uploadResultadoF;
+                    novoVeiculo.ImagemTraseiraPadrao = uploadResultadoT;
+                    novoVeiculo.ImagemLateralEsquerdaPadrao = uploadResultadoE;
+                    novoVeiculo.ImagemLateralDireitaPadrao = uploadResultadoD;
 
                     _veiculosRepository.Cadastrar(novoVeiculo);
                     return StatusCode(200, novoVeiculo);
