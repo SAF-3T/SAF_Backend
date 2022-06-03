@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SAF_3T.Domains;
 using SAF_3T.Interfaces;
 using SAF_3T.Repositories;
+using SAF_3T.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,12 +94,34 @@ namespace SAF_3T.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CheckList> CadastrarCheckList(CheckList novaChecklist)
+        public IActionResult CadastrarChecklist([FromForm] CheckList novaCheckList, IFormFile imagemFrontal, IFormFile imagemTraseira, IFormFile imagemEsquerda, IFormFile imagemDireita)
         {
             try
             {
-           _checklistRepository.Cadastrar(novaChecklist);
-            return StatusCode(201);
+                    string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                    string uploadResultadoF = Upload.UploadFile(imagemFrontal, extensoesPermitidas);
+                    string uploadResultadoT = Upload.UploadFile(imagemTraseira, extensoesPermitidas);
+                    string uploadResultadoE = Upload.UploadFile(imagemEsquerda, extensoesPermitidas);
+                    string uploadResultadoD = Upload.UploadFile(imagemDireita, extensoesPermitidas);
+
+                    if (uploadResultadoF == "Sem arquivo" || uploadResultadoT == "Sem arquivo" || uploadResultadoE == "Sem arquivo" || uploadResultadoD == "Sem arquivo")
+                    {
+                        _checklistRepository.Cadastrar(novaCheckList);
+                        return StatusCode(200, novaCheckList);
+                    }
+
+                    if (uploadResultadoF == "Extenção não permitida" || uploadResultadoT == "Extenção não permitida" || uploadResultadoE == "Extenção não permitida" || uploadResultadoD == "Extenção não permitida")
+                    {
+                        return BadRequest("Extensão de arquivo não permitida");
+                    }
+
+                    novaCheckList.ImagemFrontal = uploadResultadoF;
+                    novaCheckList.ImagemTraseira = uploadResultadoT;
+                    novaCheckList.ImagemLateralEsquerda = uploadResultadoE;
+                    novaCheckList.ImagemLateralDireita = uploadResultadoD;
+
+                    _checklistRepository.Cadastrar(novaCheckList);
+                    return StatusCode(200, novaCheckList);
             }
             catch (Exception erro)
             {
