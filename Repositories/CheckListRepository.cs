@@ -96,5 +96,10 @@ namespace SAF_3T.Repositories
             ctx.CheckLists.Update(checklistVisualizada);
             ctx.SaveChanges();
         }
+
+        public List<CheckList> ListarPorDanosCriticos(int percentual)
+        {
+            return ctx.CheckLists.Where(c => c.PorcentagemFrontal < percentual || c.PorcentagemLateralDireita < percentual || c.PorcentagemLateralEsquerda < percentual || c.PorcentagemTraseira < percentual).ToList();
+        }
     }
 }

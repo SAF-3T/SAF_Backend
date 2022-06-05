@@ -23,6 +23,20 @@ namespace SAF_3T.Controllers
             _checklistRepository = new CheckListRepository();
         }
 
+        [HttpGet("/ListarMenoresCorrespondentes/{percentual}")]
+        public IActionResult ListarMenoresCorrespondentes(int percentual)
+        {
+            try
+            {
+                return StatusCode(200, _checklistRepository.ListarPorDanosCriticos(percentual).OrderBy(c => c.PorcentagemFrontal + c.PorcentagemLateralDireita + c.PorcentagemLateralEsquerda + c.PorcentagemTraseira));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+                throw;
+            }
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<CheckList>> ListarChecklists()
         {

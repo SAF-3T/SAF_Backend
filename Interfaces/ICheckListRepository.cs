@@ -15,6 +15,7 @@ namespace SAF_3T.Interfaces
         List<CheckList> ListarMinhas(int idVeiculo);
         List<CheckList> ListarMinhasUltimas(int idVeiculo);
         CheckList ListarUltimaCadastrada();
+        List<CheckList>ListarPorDanosCriticos(int percentual);
         void AlteraCorrrespondencia(int id);
     }
 }
