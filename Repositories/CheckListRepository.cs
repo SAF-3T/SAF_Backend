@@ -100,6 +100,7 @@ namespace SAF_3T.Repositories
         public List<CheckList> ListarPorDanosCriticos(int percentual)
         {
             return ctx.CheckLists.Where(c => c.PorcentagemFrontal < percentual || c.PorcentagemLateralDireita < percentual || c.PorcentagemLateralEsquerda < percentual || c.PorcentagemTraseira < percentual)
+                .AsNoTracking()
                 .Include(c => c.IdTipoCheckListNavigation)
                 .Include(c => c.IdUsuarioNavigation)
                 .Include(c => c.IdVeiculoNavigation)
